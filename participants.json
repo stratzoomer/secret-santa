@@ -31,6 +31,22 @@
         {
             "name": "Suniti",
             "exclusions": ["Nikhil", "Urvi"]
+        },
+        {
+            "name": "Unni",
+            "exclusions": ["Uma"]
+        },
+        {
+            "name": "Uma",
+            "exclusions": ["Unni", "Veena"]
+        },
+        {
+            "name": "Veena",
+            "exclusions": ["Uma"]
+        },
+        {
+            "name": "Vivaan",
+            "exclusions": ["Unni","Veena"]
         }
     ]
 } 
