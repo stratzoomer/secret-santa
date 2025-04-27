@@ -1,0 +1,36 @@
+{
+    "participants": [
+        {
+            "name": "Brahma",
+            "exclusions": []
+        },
+        {
+            "name": "Smitha",
+            "exclusions": []
+        },
+        {
+            "name": "Neil",
+            "exclusions": []
+        },
+        {
+            "name": "Dev",
+            "exclusions": []
+        },
+        {
+            "name": "Nikhil",
+            "exclusions": ["Suniti"]
+        },
+        {
+            "name": "Urvi",
+            "exclusions": ["Suniti"]
+        },
+        {
+            "name": "Rohan",
+            "exclusions": []
+        },
+        {
+            "name": "Suniti",
+            "exclusions": ["Nikhil", "Urvi"]
+        }
+    ]
+} 
