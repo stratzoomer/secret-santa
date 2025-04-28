@@ -82,7 +82,7 @@ http://localhost:5000
     "participants": [
         {
             "name": "Alice",
-            "exclusions": ["Bob", "Charlie"]
+            "exclusions": []
         },
         {
             "name": "Bob",
@@ -91,7 +91,28 @@ http://localhost:5000
         {
             "name": "Charlie",
             "exclusions": []
+        },
+        {
+            "name": "Thor",
+            "exclusions": []
+        },
+        {
+            "name": "Zuckerberg",
+            "exclusions": []
+        },
+        {
+            "name": "Elon",
+            "exclusions": []
+        }, 
+        {
+            "name": "Elektra",
+            "exclusions": []
+        },
+        {
+            "name": "Adele",
+            "exclusions": []
         }
+            
     ]
 }
 ```
