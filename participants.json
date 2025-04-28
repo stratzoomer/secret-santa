@@ -2,7 +2,7 @@
     "participants": [
         {
             "name": "Alice",
-            "exclusions": ["Bob", "Charlie"]
+            "exclusions": []
         },
         {
             "name": "Bob",
@@ -11,6 +11,27 @@
         {
             "name": "Charlie",
             "exclusions": []
+        },
+        {
+            "name": "Thor",
+            "exclusions": []
+        },
+        {
+            "name": "Zuckerberg",
+            "exclusions": []
+        },
+        {
+            "name": "Elon",
+            "exclusions": []
+        }, 
+        {
+            "name": "Elektra",
+            "exclusions": []
+        },
+        {
+            "name": "Adele",
+            "exclusions": []
         }
+            
     ]
 }
