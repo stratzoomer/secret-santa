@@ -1,52 +1,16 @@
 {
     "participants": [
         {
-            "name": "Brahma",
+            "name": "Alice",
+            "exclusions": ["Bob", "Charlie"]
+        },
+        {
+            "name": "Bob",
+            "exclusions": ["Alice"]
+        },
+        {
+            "name": "Charlie",
             "exclusions": []
-        },
-        {
-            "name": "Smitha",
-            "exclusions": []
-        },
-        {
-            "name": "Neil",
-            "exclusions": []
-        },
-        {
-            "name": "Dev",
-            "exclusions": []
-        },
-        {
-            "name": "Nikhil",
-            "exclusions": ["Suniti"]
-        },
-        {
-            "name": "Urvi",
-            "exclusions": ["Suniti"]
-        },
-        {
-            "name": "Rohan",
-            "exclusions": []
-        },
-        {
-            "name": "Suniti",
-            "exclusions": ["Nikhil", "Urvi"]
-        },
-        {
-            "name": "Unni",
-            "exclusions": ["Uma"]
-        },
-        {
-            "name": "Uma",
-            "exclusions": ["Unni", "Veena"]
-        },
-        {
-            "name": "Veena",
-            "exclusions": ["Uma"]
-        },
-        {
-            "name": "Vivaan",
-            "exclusions": ["Unni","Veena"]
         }
     ]
-} 
+}

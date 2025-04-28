@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: secret-santa
+    name: "Secret Santa"
     env: python
     buildCommand: "./build.sh"
     startCommand: "gunicorn app:app"
