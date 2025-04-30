@@ -2,10 +2,12 @@
 
 A modern web application for managing Secret Santa gift exchanges. This application allows organizers to manage participants, generate pairings, and lets participants securely view their assignments.
 
+Built with https://www.cursor.com/
+
 ## Features
 
 - **Participant Management**
-  - Upload participant lists via JSON file
+  - Upload participant lists via JSON file. See [participants.json](participants.json)
   - Support for exclusion lists (people who can't be paired with each other)
   - Validation of participant data
 
@@ -82,7 +84,7 @@ http://localhost:5000
     "participants": [
         {
             "name": "Alice",
-            "exclusions": ["Bob", "Charlie"]
+            "exclusions": []
         },
         {
             "name": "Bob",
@@ -91,7 +93,28 @@ http://localhost:5000
         {
             "name": "Charlie",
             "exclusions": []
+        },
+        {
+            "name": "Thor",
+            "exclusions": []
+        },
+        {
+            "name": "Zuckerberg",
+            "exclusions": []
+        },
+        {
+            "name": "Elon",
+            "exclusions": []
+        }, 
+        {
+            "name": "Elektra",
+            "exclusions": []
+        },
+        {
+            "name": "Adele",
+            "exclusions": []
         }
+            
     ]
 }
 ```
@@ -158,7 +181,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
+- Created using https://www.cursor.com/
 - Built with Flask
 - Uses Bootstrap for the frontend
 - Deployed on Render
-
