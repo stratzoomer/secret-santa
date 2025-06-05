@@ -3,12 +3,33 @@ import json
 from pathlib import Path
 from secret_santa import SecretSanta
 import os
+import random
+import datetime
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # For session management
 
 # Initialize SecretSanta
 santa = SecretSanta()
+
+# List of whimsical locations and activities
+LOCATIONS = [
+    "in the kitchen, trying to cook with a lightsaber",
+    "at the gym, bench-pressing Baby Yoda",
+    "in the bathroom, having a lightsaber duel with his reflection",
+    "at the grocery store, looking for Beskar steel in the frozen foods",
+    "in the garage, trying to fix the Razor Crest with duct tape",
+    "at the beach, building sandcastles with his helmet on",
+    "in the library, reading 'The Art of Bounty Hunting'",
+    "at the coffee shop, ordering a 'Dark Side Roast'",
+    "in the park, teaching Baby Yoda to use the Force on squirrels",
+    "at the mall, looking for a new cape in the clearance section",
+    "in the garden, growing space carrots",
+    "at the bar, trying to explain why he never takes off his helmet",
+    "in the attic, organizing his collection of bounty pucks",
+    "at the zoo, trying to communicate with the Wookiees",
+    "in the basement, practicing his 'I have spoken' speech"
+]
 
 @app.route('/')
 def index():
@@ -77,6 +98,14 @@ def check_assignment():
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/where_is_mando', methods=['GET'])
+def where_is_mando():
+    location = random.choice(LOCATIONS)
+    return jsonify({
+        'message': f"Mando is {location}",
+        'timestamp': datetime.datetime.now().isoformat()
+    })
 
 if __name__ == '__main__':
     app.run(debug=True) 

@@ -1,22 +1,10 @@
 {
   "pairings": {
-    "Brahma": "Urvi",
-    "Smitha": "Brahma",
-    "Neil": "Smitha",
-    "Dev": "Suniti",
-    "Nikhil": "Dev",
-    "Urvi": "Neil",
-    "Rohan": "Nikhil",
-    "Suniti": "Rohan"
+    "Alice": "Bob",
+    "Bob": "Alice"
   },
   "passwords": {
-    "Brahma": "557529",
-    "Smitha": "311085",
-    "Neil": "667240",
-    "Dev": "503577",
-    "Nikhil": "661773",
-    "Urvi": "700595",
-    "Rohan": "944201",
-    "Suniti": "975005"
+    "Alice": "360553",
+    "Bob": "785491"
   }
 }
