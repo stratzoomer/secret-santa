@@ -109,6 +109,21 @@
                 
                 <div class="card">
                     <div class="card-body">
+                        <h5 class="card-title">Event ID</h5>
+                        <div class="mb-3">
+                            <p class="text-muted">Share this Event ID with participants so they can check their assignments.</p>
+                            <div class="input-group">
+                                <input type="text" class="form-control font-monospace" id="eventId" readonly>
+                                <button class="btn btn-outline-secondary" type="button" id="copyEventIdBtn" title="Copy to clipboard">
+                                    <i class="bi bi-clipboard"></i> Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
                         <h5 class="card-title">Passwords</h5>
                         <div id="passwordList" class="password-list"></div>
                     </div>
@@ -128,6 +143,11 @@
                             <div class="mb-3">
                                 <label for="password" class="form-label">Your Password</label>
                                 <input type="password" class="form-control" id="password" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="eventIdParticipant" class="form-label">Event ID <span class="text-muted">(optional)</span></label>
+                                <input type="text" class="form-control font-monospace" id="eventIdParticipant" placeholder="Leave blank if checking from same browser">
+                                <small class="form-text text-muted">Only needed if checking from a different browser or device</small>
                             </div>
                             <button type="submit" class="btn btn-primary">Check Assignment</button>
                         </form>
@@ -199,6 +219,10 @@
                 const data = await response.json();
                 
                 if (response.ok) {
+                    // Display event ID if provided
+                    if (data.event_id) {
+                        document.getElementById('eventId').value = data.event_id;
+                    }
                     alert('Participants loaded successfully!');
                 } else {
                     alert(`Error: ${data.error}`);
@@ -217,6 +241,11 @@
                 const data = await response.json();
                 
                 if (response.ok) {
+                    // Display event ID if provided
+                    if (data.event_id) {
+                        document.getElementById('eventId').value = data.event_id;
+                    }
+                    
                     // Display passwords
                     const passwordList = document.getElementById('passwordList');
                     passwordList.innerHTML = '';
@@ -242,6 +271,12 @@
             e.preventDefault();
             const name = document.getElementById('name').value;
             const password = document.getElementById('password').value;
+            const eventId = document.getElementById('eventIdParticipant').value.trim();
+            
+            const requestBody = { name, password };
+            if (eventId) {
+                requestBody.event_id = eventId;
+            }
             
             try {
                 const response = await fetch('/check_assignment', {
@@ -249,7 +284,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ name, password })
+                    body: JSON.stringify(requestBody)
                 });
                 const data = await response.json();
                 
@@ -269,6 +304,30 @@
                 }
             } catch (error) {
                 alert('Error checking assignment');
+            }
+        });
+
+        // Copy event ID to clipboard
+        document.getElementById('copyEventIdBtn').addEventListener('click', () => {
+            const eventIdInput = document.getElementById('eventId');
+            eventIdInput.select();
+            eventIdInput.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyEventIdBtn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+                btn.classList.remove('btn-outline-secondary');
+                btn.classList.add('btn-success');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-outline-secondary');
+                }, 2000);
+            } catch (err) {
+                alert('Failed to copy event ID. Please copy it manually.');
             }
         });
     </script>
