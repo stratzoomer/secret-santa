@@ -48,6 +48,7 @@ def test_upload_file_success(client, sample_participants_file):
     assert response.status_code == 200
     data = json.loads(response.data)
     assert data['message'] == 'Participants loaded successfully'
+    assert 'event_id' in data  # Verify event_id is returned
 
 def test_upload_file_no_file(client):
     response = client.post('/upload')
@@ -82,6 +83,7 @@ def test_generate_pairings_success(client, sample_participants_file):
     data = json.loads(response.data)
     assert 'message' in data
     assert 'passwords' in data
+    assert 'event_id' in data  # Verify event_id is returned
     assert len(data['passwords']) == 3
 
 def test_generate_pairings_no_participants(client):

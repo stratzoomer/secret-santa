@@ -100,11 +100,13 @@ class SecretSanta:
         print("Error: Could not generate valid pairings after multiple attempts")
         return None
 
-    def save_pairings(self, pairings: Dict[str, str]) -> None:
+    def save_pairings(self, pairings: Dict[str, str], base_dir: Optional[str] = None) -> None:
         """Save pairings to individual files for each participant."""
         # Create a directory for the pairings
-        pairings_dir = Path("secret_santa_pairings")
-        pairings_dir.mkdir(exist_ok=True)
+        if base_dir is None:
+            base_dir = "secret_santa_pairings"
+        pairings_dir = Path(base_dir)
+        pairings_dir.mkdir(parents=True, exist_ok=True)
         
         # Save each participant's assignment
         for giver, receiver in pairings.items():
