@@ -47,9 +47,15 @@ git clone <repository-url>
 cd secret-santa
 ```
 
-2. Install dependencies:
+2. (Optional) Create a virtual environment (recommended):
 ```bash
-pip install -r requirements.txt
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
+python3 -m pip install -r requirements.txt
 ```
 
 ## Local Development
@@ -63,6 +69,63 @@ python app.py
 ```
 http://localhost:5000
 ```
+
+## Testing
+
+The application includes a comprehensive test suite using pytest. To run the tests:
+
+### Run All Tests
+
+```bash
+# Activate virtual environment (if using one)
+source venv/bin/activate
+
+# Run all tests
+python3 -m pytest
+
+# Or with verbose output
+python3 -m pytest -v
+
+# Run without coverage (if coverage causes issues)
+python3 -m pytest -v --no-cov
+```
+
+### Run Specific Tests
+
+```bash
+# Run tests for the web application
+python3 -m pytest tests/test_app.py -v
+
+# Run tests for the core Secret Santa logic
+python3 -m pytest tests/test_secret_santa.py -v
+
+# Run a specific test function
+python3 -m pytest tests/test_app.py::test_generate_pairings_success -v
+
+# Run tests matching a pattern
+python3 -m pytest -k "test_generate" -v
+```
+
+### Useful Test Options
+
+```bash
+# Show print statements/output
+python3 -m pytest -s
+
+# Stop on first failure
+python3 -m pytest -x
+
+# Run with coverage report
+python3 -m pytest --cov=. --cov-report=html
+```
+
+### Test Coverage
+
+The test suite includes:
+- **Web Application Tests** (`test_app.py`): Tests for all Flask endpoints, file uploads, pairing generation, and assignment checking
+- **Core Logic Tests** (`test_secret_santa.py`): Tests for participant management, validation, pairing generation, and file operations
+
+All tests should pass before committing changes to the repository.
 
 ## Usage
 
