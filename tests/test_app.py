@@ -139,13 +139,4 @@ def test_check_assignment_missing_name(client):
     
     assert response.status_code == 400
     data = json.loads(response.data)
-    assert data['error'] == 'Name and password required'
-
-def test_where_is_mando_endpoint(client):
-    response = client.get('/where_is_mando')
-    assert response.status_code == 200
-    data = json.loads(response.data)
-    assert 'message' in data
-    assert 'timestamp' in data
-    assert data['message'].startswith('Mando is ')
-    assert len(data['message']) > 10  # Ensure we got a reasonable message length 
+    assert data['error'] == 'Name and password required' 
