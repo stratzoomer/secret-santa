@@ -169,19 +169,26 @@
             markdown = markdown.replace(/^## (.*$)/gm, '<h2>$1</h2>');
             markdown = markdown.replace(/^### (.*$)/gm, '<h3>$1</h3>');
             
-            // Convert code blocks
+            // Convert code blocks (do this before other conversions to preserve code)
             markdown = markdown.replace(/```json\n([\s\S]*?)```/g, '<pre><code class="language-json">$1</code></pre>');
             markdown = markdown.replace(/```bash\n([\s\S]*?)```/g, '<pre><code class="language-bash">$1</code></pre>');
+            markdown = markdown.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
             
-            // Convert inline code
+            // Convert inline code (do this before other inline conversions)
             markdown = markdown.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Convert bold text
+            markdown = markdown.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            
+            // Convert links [text](url)
+            markdown = markdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
             
             // Convert lists
             markdown = markdown.replace(/^\s*[-*+]\s+(.*$)/gm, '<li>$1</li>');
             markdown = markdown.replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>');
             
             // Convert paragraphs
-            markdown = markdown.replace(/^(?!<[h|u|p|pre])(.*$)/gm, '<p>$1</p>');
+            markdown = markdown.replace(/^(?!<[h|u|p|pre|a])(.*$)/gm, '<p>$1</p>');
             
             // Clean up empty paragraphs
             markdown = markdown.replace(/<p><\/p>/g, '');
