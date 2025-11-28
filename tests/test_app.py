@@ -1,13 +1,21 @@
 import pytest
 from pathlib import Path
 import json
-from app import app
+from app import app, event_santas
 
 @pytest.fixture
 def client():
     app.config['TESTING'] = True
+    app.config['SECRET_KEY'] = 'test-secret-key-for-sessions'
+    # Clear event_santas dictionary before each test
+    event_santas.clear()
     with app.test_client() as client:
+        # Enable session support in test client
+        with client.session_transaction() as sess:
+            pass  # Initialize session
         yield client
+    # Clear after test as well
+    event_santas.clear()
 
 @pytest.fixture
 def sample_participants_file(tmp_path):
@@ -23,6 +31,10 @@ def sample_participants_file(tmp_path):
             },
             {
                 "name": "Charlie",
+                "exclusions": []
+            },
+            {
+                "name": "Diana",
                 "exclusions": []
             }
         ]
@@ -73,9 +85,14 @@ def test_upload_file_invalid_json(client, tmp_path):
 def test_generate_pairings_success(client, sample_participants_file):
     # First upload participants
     with open(sample_participants_file, 'rb') as f:
-        client.post('/upload', data={
+        upload_response = client.post('/upload', data={
             'file': (f, 'participants.json')
         })
+    
+    # Verify upload was successful
+    assert upload_response.status_code == 200
+    upload_data = json.loads(upload_response.data)
+    assert upload_data['message'] == 'Participants loaded successfully'
     
     # Then generate pairings
     response = client.post('/generate')
@@ -84,7 +101,7 @@ def test_generate_pairings_success(client, sample_participants_file):
     assert 'message' in data
     assert 'passwords' in data
     assert 'event_id' in data  # Verify event_id is returned
-    assert len(data['passwords']) == 3
+    assert len(data['passwords']) == 4
 
 def test_generate_pairings_no_participants(client):
     response = client.post('/generate')

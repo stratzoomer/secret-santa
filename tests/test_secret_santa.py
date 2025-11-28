@@ -79,10 +79,11 @@ def test_generate_pairings_valid(santa):
     santa.add_participant("Alice", ["Bob"])
     santa.add_participant("Bob", ["Alice"])
     santa.add_participant("Charlie")
+    santa.add_participant("Diana")
     
     pairings = santa.generate_pairings()
     assert pairings is not None
-    assert len(pairings) == 3
+    assert len(pairings) == 4
     
     # Check that no one is paired with themselves
     for giver, receiver in pairings.items():
@@ -105,7 +106,9 @@ def test_save_pairings(santa, tmp_path):
     santa.add_participant("Bob")
     
     pairings = {"Alice": "Bob", "Bob": "Alice"}
-    santa.save_pairings(pairings)
+    # Pass base_dir to save in tmp_path
+    base_dir = str(tmp_path / "secret_santa_pairings")
+    santa.save_pairings(pairings, base_dir=base_dir)
     
     # Check that files were created
     assert (tmp_path / "secret_santa_pairings" / "Alice.json").exists()

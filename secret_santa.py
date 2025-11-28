@@ -27,6 +27,10 @@ class SecretSanta:
             if 'participants' not in data:
                 print("Error: Invalid file format. Missing 'participants' key.")
                 return False
+            
+            # Clear existing participants before loading new ones
+            self.participants.clear()
+            self.passwords.clear()
                 
             for participant in data['participants']:
                 if 'name' not in participant:
@@ -36,7 +40,7 @@ class SecretSanta:
                 name = participant['name']
                 exclusions = participant.get('exclusions', [])
                 self.add_participant(name, exclusions)
-                
+            
             return True
             
         except json.JSONDecodeError:
