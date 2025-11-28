@@ -2,6 +2,8 @@
 
 A modern web application for managing Secret Santa gift exchanges. This application allows organizers to manage participants, generate pairings, and lets participants securely view their assignments.
 
+**🌐 Live Application**: Available at [https://secret-santa-idlx.onrender.com/](https://secret-santa-idlx.onrender.com/)
+
 Built with https://www.cursor.com/
 
 ## Features
@@ -21,6 +23,11 @@ Built with https://www.cursor.com/
   - Each participant can only view their own assignment
   - Modern, responsive web interface
 
+- **Session-Based Isolation**
+  - Each Secret Santa event gets a unique Event ID
+  - Multiple organizers can run events simultaneously without conflicts
+  - Participants can check assignments from any device using the Event ID
+
 ## Usage
 
 ### For Organizers
@@ -29,18 +36,28 @@ Built with https://www.cursor.com/
    - Prepare a JSON file with participant information (see example below)
    - Use the "Upload Participants" form to upload the file
    - Verify the upload was successful
+   - **Note**: A unique Event ID will be automatically generated and displayed in the Event ID section
 
 2. **Generate Pairings**
    - Click the "Generate Pairings" button
    - The system will create valid pairings
    - Passwords will be displayed for distribution to participants
+   - **Important**: Copy the Event ID using the "Copy" button and share it with all participants
+
+3. **Share with Participants**
+   - Distribute the Event ID to all participants (they'll need it to check assignments from different devices)
+   - Share individual passwords with each participant privately
+   - Participants will need both the Event ID and their password to view assignments
 
 ### For Participants
 
 1. **View Assignment**
-   - Enter your name and password
+   - Enter your name and password (provided by your organizer)
+   - **If checking from a different browser or device**: Enter the Event ID provided by your organizer in the optional Event ID field
    - Click "Check Assignment"
    - View your Secret Santa assignment
+
+**Note**: If you're using the same browser where the organizer created the event, you can leave the Event ID field blank - it will be automatically detected.
 
 ### Participant JSON Format
 
@@ -84,6 +101,23 @@ Built with https://www.cursor.com/
 }
 ```
 
+
+## Understanding Event IDs
+
+Each Secret Santa event gets a unique Event ID when participants are uploaded. This allows:
+
+- **Multiple Events**: Different organizers can run Secret Santa events simultaneously without any conflicts
+- **Cross-Device Access**: Participants can check their assignments from any device by entering the Event ID
+- **Data Privacy**: Each event's data is completely isolated from others
+
+The Event ID is displayed in the Organizer tab after uploading participants or generating pairings. Organizers should copy and share this Event ID with all participants.
+
+## Security
+
+- Passwords are generated randomly for each participant
+- Assignments are stored securely, isolated by Event ID
+- Each participant can only view their own assignment with their unique password
+- HTTPS is enforced for all connections
 
 ## Acknowledgments
 
